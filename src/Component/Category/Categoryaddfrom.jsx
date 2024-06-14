@@ -16,7 +16,7 @@ export default function Categoryaddfrom() {
     createcategory(categoryList).then((response)=>{
       console.log(response.data);
       alert('data saved succesful');
-      navigate('/')
+      navigate('/List-Category')
       
     })
   }

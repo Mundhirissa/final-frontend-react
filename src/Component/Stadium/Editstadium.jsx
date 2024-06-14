@@ -80,7 +80,7 @@ export default function Editstadium() {
         <br></br>
         <br>
          </br>
-        <button  className='btn btn-outline-primary' type="submit" onClick={Edits_tadium}>Save</button>
+        <button  className='btn btn-outline-primary' type="submit" onClick={Edits_tadium}>Update</button>
         <button  className='btn btn-outline-danger' type="button" onClick={cancel} >Cancel</button>
       </form>
     </div>

@@ -33,6 +33,8 @@ function cancel(){
     <div>
        <br></br>
          <br></br>
+         <h2>ADD STADIUM FORM</h2>
+         <br></br>
         <form >
         <input
           type="text"

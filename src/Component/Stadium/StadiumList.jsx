@@ -18,9 +18,7 @@ export default function StadiumList() {
           });
       }, []);
 
-      function stadiumfrom(){
-        navigate('/add-stadium')
-      }
+   
 
 
 
@@ -43,7 +41,7 @@ export default function StadiumList() {
 
   return (
     <div>
-      <button className='btn btn-outline-primary' onClick={stadiumfrom}>AddStadim</button>
+     
 <table className='table table-striped table table-bordered'>
         <thead>
           <tr>

@@ -1,4 +1,3 @@
-// src/LoginForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -11,42 +10,64 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Submitting login form', { username, password });
+
     try {
       const response = await axios.post('http://localhost:8080/api/users/login', { username, password });
-      setMessage(response.data);
+      console.log('Response received from server:', response.data);
+
+      if (response.data.message === 'Login successful') {
+        localStorage.setItem('username', username);
+        localStorage.setItem('role', response.data.role);
+
+        setMessage('Login successful!');
+        console.log('Login successful, navigating to List-stadium');
+        navigate('/List-stadium');
+      } else {
+        setMessage('Invalid username or password');
+      }
     } catch (error) {
+      console.error('Error during login:', error);
       setMessage('An error occurred. Please try again.');
     }
   };
 
-  function register(){
-navigate('/Register-form')
-  }
+  const register = () => {
+    navigate('/Register-form');
+  };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button  className='btn btn-primary' type="submit">Login</button>
-        <button className='btn btn-info' type='button' onClick={register}>Register</button>
-      </form>
-      {message && <p>{message}</p>}
+    <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+      <div className="card shadow-lg p-4" style={{ maxWidth: '400px', width: '100%' }}>
+        <h2 className="card-title text-center mb-4">Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              className="form-control"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              className="form-control"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="d-flex justify-content-between mt-4">
+            <button className="btn btn-primary" type="submit">Login</button>
+            <button className="btn btn-info" type="button" onClick={register}>Register</button>
+          </div>
+        </form>
+        {message && <p className="mt-3 text-center text-danger">{message}</p>}
+      </div>
     </div>
   );
 };
