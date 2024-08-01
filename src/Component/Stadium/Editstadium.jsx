@@ -1,88 +1,93 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getbyidstadium, updatestadium } from '../../Services/Stadiumservices';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Editstadium() {
     const { stadiumid } = useParams();
-    const [name, setname] = useState('');
-    const [capacity, setcapacity] = useState('');
-    const [location, setlocation] = useState('');
+    const [name, setName] = useState('');
+    const [capacity, setCapacity] = useState('');
+    const [location, setLocation] = useState('');
     const navigate = useNavigate();
 
-
-    function cancel(){
-        navigate('/List-stadium')
-    }
     useEffect(() => {
-        getbyidstadium(stadiumid).then(response => {
-            // Populate the name field with the fetched data
-            setname(response.data.name || '');
-            setcapacity(response.data.capacity || '');
-            setlocation(response.data.location || '');
-          })
-          .catch(error => {
-            console.error('Error fetching data by ID:', error);
-          });
-      }, [stadiumid]);
+        getbyidstadium(stadiumid)
+            .then(response => {
+                setName(response.data.name || '');
+                setCapacity(response.data.capacity || '');
+                setLocation(response.data.location || '');
+            })
+            .catch(error => {
+                console.error('Error fetching data by ID:', error);
+            });
+    }, [stadiumid]);
 
-
-
-      function Edits_tadium(e){
+    const handleEditStadium = (e) => {
         e.preventDefault();
-        const upateList ={name,capacity,location}
-        console.log(upateList);
-       updatestadium(upateList,stadiumid).then((response)=>{
-          console.log(response.data);
-          alert('data updated succesful');
-          navigate('/List-stadium');
-        }).catch(err => console.log(err));
-      }
+        const updatedStadium = { name, capacity, location };
+        updatestadium(updatedStadium, stadiumid)
+            .then(response => {
+                alert('Data updated successfully');
+                navigate('/List-stadium');
+            })
+            .catch(err => console.error('Error updating stadium:', err));
+    };
 
+    const handleCancel = () => {
+        navigate('/List-stadium');
+    };
 
-
-  return (
-    <div>
-        <h1>EditStadium</h1>
-        <br></br>
-         <br></br>
-        <form >
-        <input
-          type="text"
-          placeholder="Enter name of stadium"
-          required
-          name="name"
-          value={name}
-          onChange={(e) => setname(e.target.value)}
-        />
-         <br></br>
-         <br></br>
-
-        <input
-          type="number"
-          placeholder="Enter Capacity of stadium"
-          required
-          name="capacity"
-          value={capacity}
-          onChange={(e) => setcapacity(e.target.value)}
-        />
-        <br></br>
-        <br>
-         </br>
-
-        <input
-          type="text"
-          placeholder="Enter location of stadium"
-          required
-          name="location"
-          value={location}
-          onChange={(e) => setlocation(e.target.value)}
-        />
-        <br></br>
-        <br>
-         </br>
-        <button  className='btn btn-outline-primary' type="submit" onClick={Edits_tadium}>Update</button>
-        <button  className='btn btn-outline-danger' type="button" onClick={cancel} >Cancel</button>
-      </form>
-    </div>
-  )
+    return (
+        <div className="container mt-5">
+            <div className="card">
+                <div className="card-header">
+                    <h2>Edit Stadium</h2>
+                </div>
+                <div className="card-body">
+                    <form onSubmit={handleEditStadium}>
+                        <div className="form-group mb-3">
+                            <label htmlFor="name">Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                className="form-control"
+                                placeholder="Enter name of stadium"
+                                required
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group mb-3">
+                            <label htmlFor="capacity">Capacity</label>
+                            <input
+                                type="number"
+                                id="capacity"
+                                className="form-control"
+                                placeholder="Enter capacity of stadium"
+                                required
+                                value={capacity}
+                                onChange={(e) => setCapacity(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group mb-3">
+                            <label htmlFor="location">Location</label>
+                            <input
+                                type="text"
+                                id="location"
+                                className="form-control"
+                                placeholder="Enter location of stadium"
+                                required
+                                value={location}
+                                onChange={(e) => setLocation(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <button className="btn btn-outline-primary me-2" type="submit">Update</button>
+                            <button className="btn btn-outline-danger" type="button" onClick={handleCancel}>Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
 }

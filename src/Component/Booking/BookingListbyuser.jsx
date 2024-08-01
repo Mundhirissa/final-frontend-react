@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Bookings = () => {
     const [bookings, setBookings] = useState([]);
@@ -35,36 +36,48 @@ const Bookings = () => {
     }
 
     return (
-        <div>
-            <h1>Bookings</h1>
-            {bookings.length > 0 ? (
-                <table className='table table-striped table table-bordered'>
-                    <thead>
-                        <tr>
-                            <th>Booking ID</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>User</th>
-                            <th>Stadium name</th>
-                            <th>Category</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {bookings.map(booking => (
-                            <tr key={booking.Bookingid}>
-                                <td>{booking.Bookingid}</td>
-                                <td>{booking.date}</td>
-                                <td>{booking.time}</td>
-                                <td>{booking.user?.username}</td>
-                                <td>{booking.stadium?.name}</td>
-                                <td>{booking.category?.categoryname}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            ) : (
-                <p>No bookings found</p>
-            )}
+        <div className="container mt-5">
+            <div className="card">
+                <div className="card-header">
+                    <h1>Bookings</h1>
+                </div>
+                <div className="card-body">
+                    {bookings.length > 0 ? (
+                        <table className='table table-striped table-bordered'>
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Date</th>
+                                    <th>Start-Time</th>
+                                    <th>End-Time</th>
+                                    <th>User</th>
+                                    <th>Stadium Name</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {bookings.map(booking => (
+                                    <tr key={booking.bookingId}>
+                                        <td>{booking.bookingId}</td>
+                                        <td>{booking.date}</td>
+                                        <td>{booking.startTime}</td>
+                                        <td>{booking.endTime}</td>
+                                        <td>{booking.user?.username}</td>
+                                        <td>{booking.stadium?.name}</td>
+                                        <td>{booking.category?.categoryname}</td>
+                                        <td style={{ color: booking.status === 'Confirmed' ? 'green' : 'red' }}>
+                                            {booking.status}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <p>No bookings found</p>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };

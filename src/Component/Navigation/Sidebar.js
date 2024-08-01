@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaHome, FaList, FaPlus, FaSignInAlt, FaUserPlus, FaBookmark, FaClipboardList, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaList, FaPlus, FaSignInAlt, FaUserPlus, FaBookmark, FaClipboardList, FaUser,FaSignOutAlt } from 'react-icons/fa';
 
 const SidebarContainer = styled.div`
   width: ${({ isOpen }) => (isOpen ? '250px' : '60px')};
@@ -128,14 +128,27 @@ const Sidebar = () => {
         )}
         {role === 'admin' && (
           <>
+           <MenuItem to="/admin" isOpen={isOpen}>
+              <FaHome />
+              <span>Dashboard</span>
+            </MenuItem>
+
             <MenuItem to="/add-stadium" isOpen={isOpen}>
               <FaPlus />
               <span>Add Stadium</span>
             </MenuItem>
+
             <MenuItem to="/List-stadium" isOpen={isOpen}>
               <FaList />
               <span>List Stadium</span>
             </MenuItem>
+
+            <MenuItem to="/List-User" isOpen={isOpen}>
+              <FaList />
+              <span>List User</span>
+            </MenuItem>
+
+
             <MenuItem to="/add-Category" isOpen={isOpen}>
               <FaPlus />
               <span>Add Category</span>
@@ -156,15 +169,26 @@ const Sidebar = () => {
               <FaClipboardList />
               <span>List Booking By User</span>
             </MenuItem>
+            
+            <MenuItem to="/profile" isOpen={isOpen}>
+              <FaUser />
+              <span>User-Profile</span>
+            </MenuItem>
           </>
         )}
         {role === 'user' && (
           <>
-            <MenuItem to="/List-stadium" isOpen={isOpen}>
+            <MenuItem to="/List-stadium-user" isOpen={isOpen}>
               <FaList />
               <span>List Stadium</span>
             </MenuItem>
-            <MenuItem to="/List-Category" isOpen={isOpen}>
+            
+            <MenuItem to="/Listbooking-confired" isOpen={isOpen}>
+              <FaList />
+              <span>List confirmed</span>
+            </MenuItem>
+
+            <MenuItem to="/List-Category-user" isOpen={isOpen}>
               <FaList />
               <span>List Category</span>
             </MenuItem>
@@ -175,6 +199,10 @@ const Sidebar = () => {
             <MenuItem to="/Listbyuser-booking" isOpen={isOpen}>
               <FaClipboardList />
               <span>List Booking By User</span>
+            </MenuItem>
+            <MenuItem to="/profile" isOpen={isOpen}>
+              <FaUser />
+              <span>User-Profile</span>
             </MenuItem>
           </>
         )}
