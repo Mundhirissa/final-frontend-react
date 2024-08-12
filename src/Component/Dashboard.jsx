@@ -1,10 +1,12 @@
+
 import React, { useEffect, useState } from 'react';
-import { FaUser, FaClipboardList } from 'react-icons/fa';
+import { FaClipboardList, FaMoneyBill, FaMoneyBillWave, FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
     const [userCount, setUserCount] = useState(0);
     const [bookingCount, setBookingCount] = useState(0);
+    const [totalPaidAmount, setTotalPaidAmount] = useState(0); // New state for total paid amount
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,6 +23,13 @@ const Dashboard = () => {
             .catch(error => console.error('Error fetching booking count:', error));
     }, []);
 
+    useEffect(() => {
+        fetch('http://localhost:8080/api/payments/total-paid-amount')  // Fetching total paid amount
+            .then(response => response.json())
+            .then(data => setTotalPaidAmount(data))
+            .catch(error => console.error('Error fetching total paid amount:', error));
+    }, []);
+
     const handleCardClick = (path) => {
         navigate(path);
     };
@@ -34,6 +43,10 @@ const Dashboard = () => {
             <div style={styles.card} onClick={() => handleCardClick('/List-booking')}>
                 <h2><FaClipboardList /> Total Bookings</h2>
                 <p>{bookingCount}</p>
+            </div>
+            <div style={styles.card}>
+                <h2><FaMoneyBill /> Total Revenue</h2>
+                <p>{totalPaidAmount}</p>
             </div>
         </div>
     );

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaTrash, FaEdit } from 'react-icons/fa';
@@ -20,6 +21,7 @@ export default function StadiumList() {
     }, []);
 
     const handleDeletestadium = (stadiumid) => {
+        if (window.confirm('Are you sure you want to delete this Stadium?')) {
         deletebyidstadium(stadiumid)
             .then(response => {
                 alert("Stadium deleted successfully");
@@ -28,6 +30,7 @@ export default function StadiumList() {
             .catch(error => {
                 console.error('Error deleting stadium:', error);
             });
+        }
     };
 
     return (
@@ -44,6 +47,8 @@ export default function StadiumList() {
                                 <th>Stadium Name</th>
                                 <th>Stadium Capacity</th>
                                 <th>Stadium Location</th>
+                                <th>Day-Price</th>
+                                <th>Nigth-Price</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -54,6 +59,8 @@ export default function StadiumList() {
                                     <td>{stadium.name}</td>
                                     <td>{stadium.capacity}</td>
                                     <td>{stadium.location}</td>
+                                    <td>{stadium.daytimePrice}</td>
+                                    <td>{stadium.nighttimePrice}</td>
                                     <td>
                                         <button className='btn btn-outline-danger me-2' onClick={() => handleDeletestadium(stadium.stadiumid)}>
                                             <FaTrash />
@@ -61,6 +68,7 @@ export default function StadiumList() {
                                         <Link to={`/edit-stadium/${stadium.stadiumid}`} className='btn btn-outline-info me-2'>
                                             <FaEdit />
                                         </Link>
+                                        <Link to={`/BookingBystadium/${stadium.stadiumid}`} className='btn btn-outline-secondary'>Check-Availability</Link>
                                     </td>
                                 </tr>
                             ))}

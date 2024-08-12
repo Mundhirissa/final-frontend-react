@@ -25,6 +25,13 @@ import StadiumListUser from './Component/Stadium/StadiumListUser';
 import CategoryListuser from './Component/Category/CategoryListuser';
 import ConfirmedBookingsTable from './Component/Booking/ConfirmedBookingsTable';
 
+import PaymentPage from './Component/Payment/Paymentpage';
+import CreateStadiumstaff from './Component/Staff/CreateStadiumstaff';
+import Bookingliststaff from './Component/Staff/Bookingliststaff';
+import Paymentaddform from './Component/Payment/Paymentaddform';
+import StaffList from './Component/Staff/StaffList';
+import StadiumRevenue from './Component/StadiumRevenue';
+
 const Content = styled.div`
   padding: 20px;
   transition: margin-left 0.3s ease;
@@ -64,6 +71,9 @@ const AppContent = () => {
           <Route path="/List-User" element={<Listuser />} />
           <Route path="/profile" element={<Userprofile />} />
 
+          <Route path="/satff-add" element={<CreateStadiumstaff />} />
+
+
           <Route path="/admin" element={<Dashboard />} />
 
           <Route path="/edit-User/:userid" element={<EditUser />} />
@@ -71,10 +81,16 @@ const AppContent = () => {
           <Route path="/BookingBystadium/:stadiumid" element={<Bookingdetailbystadium />} />
 
           <Route path="/add-Category" element={<Categoryaddfrom />} />
+          <Route path="/Stafflist" element={<StaffList />} />
+
           <Route path="/add-stadium" element={<StadiumAddform />} />
           <Route path="/edit-stadium/:stadiumid" element={<Editstadium />} />
           <Route path="/edit-Category/:categoryid" element={<CataegoryEdit />} />
           <Route path="/List-booking" element={<BookingList />} />
+
+
+          <Route path="/payment/:bookingId" element={<PaymentPage />} />
+
 
           <Route path="/edit-booking/:bookingId" element={<Editbooking />} />
         </>
@@ -92,9 +108,32 @@ const AppContent = () => {
           <Route path="/Listbooking-confired" element={<ConfirmedBookingsTable />} />
           <Route path="/profile" element={<Userprofile />} />
           <Route path="*" element={<Navigate to="/List-stadium-user" />} />
+
+
+          <Route path="/payment/:bookingId" element={<PaymentPage />} />
+          <Route path="/makepayemnt" element={<Paymentaddform />} />
+
         </>
       );
     }
+
+
+    if (role === 'staff') {
+      return (
+        <>
+        
+       
+        <Route path="/Listbookign" element={<Bookingliststaff/>} />
+        <Route path="/edit-booking/:bookingId" element={<Editbooking />} />
+          <Route path="/profile" element={<Userprofile />} />
+          <Route path="/amountstadium" element={< StadiumRevenue/>} />
+          <Route path="*" element={<Navigate to="/List-stadium-user" />} />
+
+
+        </>
+      );
+    }
+
 
     return <Route path="*" element={<Navigate to="/" />} />;
   };

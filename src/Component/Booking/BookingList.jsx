@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaTrash, FaEdit } from 'react-icons/fa';
@@ -19,6 +20,7 @@ export default function BookingList() {
     }, []);
 
     function handleDeletebooking(bookingId) {
+        if (window.confirm('Are you sure you want to delete this booking?')) {
         // Handle booking deletion logic
         deletebyidbooking(bookingId).then(response => {
             alert("Booking deleted successfully");
@@ -27,6 +29,7 @@ export default function BookingList() {
         }).catch(error => {
             console.error('Error deleting booking:', error);
         });
+    }
     }
 
     function handleConfirmBooking(bookingId) {
@@ -59,7 +62,7 @@ export default function BookingList() {
                                 <th>Category Name</th>
                                 <th>Stadium Name</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                {/* <th>Action</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -74,15 +77,15 @@ export default function BookingList() {
                                     <td style={{ color: booking.status === 'Confirmed' ? 'green' : 'red' }}>
                                         {booking.status}
                                     </td>
-                                    <td>
+                                    {/* <td>
                                         <button className='btn btn-outline-danger me-2' onClick={() => handleDeletebooking(booking.bookingId)}>
                                             <FaTrash />
                                         </button>
                                         <Link to={`/edit-booking/${booking.bookingId}`} className='btn btn-outline-info me-2'>
                                             <FaEdit />
                                         </Link>
-                                        <button className='btn btn-success' onClick={() => handleConfirmBooking(booking.bookingId)}>Confirm</button>
-                                    </td>
+                                        <button className='btn btn-success' onClick={() => handleConfirmBooking(booking.bookingId)}>Confim</button>
+                                    </td> */}
                                 </tr>
                             ))}
                         </tbody>

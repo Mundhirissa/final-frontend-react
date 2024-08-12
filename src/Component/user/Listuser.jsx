@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaTrash, FaEdit } from 'react-icons/fa';
@@ -29,6 +30,7 @@ export default function Listuser() {
     };
 
     function handleDeleteuser(userid) {
+        if (window.confirm('Are you sure you want to delete this user?')) {
         // Handle user deletion logic
         deletebyiduser(userid).then(response => {
             alert("User deleted successfully");
@@ -37,6 +39,7 @@ export default function Listuser() {
         }).catch(error => {
             console.error('Error deleting user:', error);
         });
+    }
     }
 
     return (

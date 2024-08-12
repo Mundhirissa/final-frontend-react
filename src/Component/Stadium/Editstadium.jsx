@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getbyidstadium, updatestadium } from '../../Services/Stadiumservices';
@@ -8,6 +9,8 @@ export default function Editstadium() {
     const [name, setName] = useState('');
     const [capacity, setCapacity] = useState('');
     const [location, setLocation] = useState('');
+    const [daytimePrice, setDaytimePrice] = useState('');
+    const [nighttimePrice, setNighttimePrice] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,6 +19,8 @@ export default function Editstadium() {
                 setName(response.data.name || '');
                 setCapacity(response.data.capacity || '');
                 setLocation(response.data.location || '');
+                setDaytimePrice(response.data.daytimePrice || '');
+                setNighttimePrice(response.data.nighttimePrice || '');
             })
             .catch(error => {
                 console.error('Error fetching data by ID:', error);
@@ -24,7 +29,7 @@ export default function Editstadium() {
 
     const handleEditStadium = (e) => {
         e.preventDefault();
-        const updatedStadium = { name, capacity, location };
+        const updatedStadium = { name, capacity, location,daytimePrice,nighttimePrice };
         updatestadium(updatedStadium, stadiumid)
             .then(response => {
                 alert('Data updated successfully');
@@ -69,6 +74,7 @@ export default function Editstadium() {
                                 onChange={(e) => setCapacity(e.target.value)}
                             />
                         </div>
+
                         <div className="form-group mb-3">
                             <label htmlFor="location">Location</label>
                             <input
@@ -81,6 +87,31 @@ export default function Editstadium() {
                                 onChange={(e) => setLocation(e.target.value)}
                             />
                         </div>
+                        <div className="form-group mb-3">
+                            <label htmlFor="daytimePrice">daytimePrice</label>
+                            <input
+                                type="number"
+                                id="daytimePrice"
+                                className="form-control"
+                                placeholder="Enter daytimePrice of stadium"
+                                required
+                                value={daytimePrice}
+                                onChange={(e) => setDaytimePrice(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group mb-3">
+                            <label htmlFor="nighttimePrice">nighttimePrice</label>
+                            <input
+                                type="number"
+                                id="nighttimePrice"
+                                className="form-control"
+                                placeholder="Enter nighttimePrice of stadium"
+                                required
+                                value={nighttimePrice}
+                                onChange={(e) => setNighttimePrice(e.target.value)}
+                            />
+                        </div>
+
                         <div className="form-group">
                             <button className="btn btn-outline-primary me-2" type="submit">Update</button>
                             <button className="btn btn-outline-danger" type="button" onClick={handleCancel}>Cancel</button>

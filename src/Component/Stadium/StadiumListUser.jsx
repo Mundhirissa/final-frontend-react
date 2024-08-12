@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Liststadium } from '../../Services/Stadiumservices';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -28,7 +29,10 @@ export default function StadiumListUser() {
                                 <h5 className="card-title">{stadium.name}</h5>
                                 <p className="card-text"><strong>Capacity:</strong> {stadium.capacity}</p>
                                 <p className="card-text"><strong>Location:</strong> {stadium.location}</p>
-                                <Link to={`/BookingBystadium/${stadium.stadiumid}`} className='btn btn-outline-secondary'>Details</Link>
+                                <div className="d-flex justify-content-between">
+                                    <Link to={`/BookingBystadium/${stadium.stadiumid}`} className='btn btn-outline-secondary'>Details</Link>
+                                    <Link to={'/Create-booking/'} className='btn btn-primary'>Book</Link>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
 const CreateBooking = () => {
+    const today = new Date().toISOString().split('T')[0];
     const [formData, setFormData] = useState({
         date: '',
         startTime: '',
@@ -105,6 +107,7 @@ const CreateBooking = () => {
                                 name="date" 
                                 value={formData.date} 
                                 onChange={handleChange} 
+                                min={today}
                                 required 
                             />
                         </div>

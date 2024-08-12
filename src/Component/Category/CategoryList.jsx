@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Listcategory, deletebyidcategory } from '../../Services/Categoryservices';
@@ -19,6 +20,7 @@ export default function CategoryList() {
     }, []);
 
     const handleDeletecategory = (categoryid) => {
+        if (window.confirm('Are you sure you want to delete this Category?')) {
         // Handle category deletion logic
         deletebyidcategory(categoryid).then(response => {
             alert("Category deleted successfully");
@@ -27,6 +29,7 @@ export default function CategoryList() {
         }).catch(error => {
             console.error('Error deleting category:', error);
         });
+    }
     };
 
     return (

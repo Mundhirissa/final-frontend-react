@@ -1,11 +1,27 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { deletebyidbooking } from '../../Services/Bookingservices';
+import { FaTimes, FaEdit } from 'react-icons/fa';
 
 const Bookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    function handleDeletebooking(bookingId) {
+        if (window.confirm('Are you sure you want to cancel this booking?')) {
+        // Handle booking deletion logic
+        deletebyidbooking(bookingId).then(response => {
+            alert("Booking deleted successfully");
+            // Update state after deletion
+            setBookings(prevBookingList => prevBookingList.filter(booking => booking.bookingId !== bookingId));
+        }).catch(error => {
+            console.error('Error deleting booking:', error);
+        });
+    }
+    }
 
     useEffect(() => {
         // Retrieve username from local storage
@@ -54,6 +70,7 @@ const Bookings = () => {
                                     <th>Stadium Name</th>
                                     <th>Category</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,6 +85,11 @@ const Bookings = () => {
                                         <td>{booking.category?.categoryname}</td>
                                         <td style={{ color: booking.status === 'Confirmed' ? 'green' : 'red' }}>
                                             {booking.status}
+                                        </td>
+                                        <td>
+                                        <button className='btn btn-outline-danger me-2' onClick={() => handleDeletebooking(booking.bookingId)}>
+                                            Cancel
+                                        </button>
                                         </td>
                                     </tr>
                                 ))}
