@@ -41,6 +41,11 @@ const PaymentComponent = () => {
           <p>Payment Status: {payment.paymentstatus}</p>
           <p>Payment Date: {payment.paymentdate}</p>
           <p>Control Number: {payment.controlNumber}</p>
+          <p>Firstname: {payment.booking.user?.firstname}</p>
+          <p>Lastname: {payment.booking.user?.lastname}</p>
+          <p>Username: {payment.booking.user?.username}</p>
+          <p>Booking date: {payment.booking.date}</p>
+         
         </div>
       )}
       {error && <p>Error: {error}</p>}

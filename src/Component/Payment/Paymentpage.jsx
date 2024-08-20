@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Alert, Card } from 'react-bootstrap';
 import axios from 'axios';
+import jsPDF from 'jspdf';
 
 const PaymentPage = () => {
   const { bookingId } = useParams();
   const [controlNumber, setControlNumber] = useState(null);
   const [amount, setAmount] = useState(null);
   const [stadium, setStadium] = useState(null);
+  const [date, setdate] = useState(null);
   const [paymentstatus, setPaymentstatus] = useState(null);
   const [error, setError] = useState(null);
 
@@ -22,6 +24,7 @@ const PaymentPage = () => {
           setAmount(data.amount);
           setStadium(data.booking.stadium);
           setPaymentstatus(data.paymentstatus);
+          setdate(data.paymentdate)
         }
       } catch (error) {
         setError(error.message);
@@ -31,7 +34,6 @@ const PaymentPage = () => {
     fetchPaymentDetails();
   }, [bookingId]);
   
-
   const generateControlNumber = async () => {
     try {
       const response = await axios.post('http://localhost:8080/api/payments/generate-control-number', { bookingId });
@@ -40,9 +42,21 @@ const PaymentPage = () => {
       setAmount(data.amount);
       setStadium(data.stadium);
       setPaymentstatus(data.paymentstatus);
+      setdate(data.paymentdate)
     } catch (error) {
       setError(error.message);
     }
+  };
+
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Payment Details", 20, 10);
+    doc.text(`Control Number: ${controlNumber}`, 20, 20);
+    doc.text(`Amount: ${amount}`, 20, 30);
+    doc.text(`Stadium: ${stadium?.name}`, 20, 40);
+    doc.text(`Status: ${paymentstatus}`, 20, 50);
+    doc.text(`Paymentdate: ${date}`,20,60)
+    doc.save(`Payment_Details_${bookingId}.pdf`);
   };
 
   return (
@@ -65,6 +79,9 @@ const PaymentPage = () => {
             <Card.Text>
               <strong>Status:</strong> {paymentstatus}
             </Card.Text>
+            {paymentstatus === 'paid' && (
+              <Button onClick={downloadPDF} className="mt-3">Download PDF</Button>
+            )}
           </Card.Body>
         </Card>
       ) : (
