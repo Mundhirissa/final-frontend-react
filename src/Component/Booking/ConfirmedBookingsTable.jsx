@@ -39,7 +39,7 @@ const ConfirmedBookingsTable = () => {
 
   return (
     <Table striped bordered hover>
-      <thead>
+      <thead className="table-dark">
         <tr>
           <th>ID</th>
           <th>Date</th>

@@ -53,7 +53,7 @@ export default function BookingList() {
                 </div>
                 <div className="card-body">
                     <table className='table table-striped table-bordered'>
-                        <thead>
+                        <thead className="table-dark">
                             <tr>
                                 <th>Date</th>
                                 <th>Start-Time</th>

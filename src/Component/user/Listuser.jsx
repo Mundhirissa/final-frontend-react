@@ -62,7 +62,7 @@ export default function Listuser() {
                         </div>
                     </form>
                     <table className='table table-striped table-bordered'>
-                        <thead>
+                        <thead className="table-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Firstname</th>

@@ -204,6 +204,17 @@ const Sidebar = () => {
                   <FaClipboardList />
                   <span>List Booking</span>
                 </MenuItem>
+
+                <MenuItem to="/Monthbooking" isOpen={isOpen}>
+                  <FaClipboardList />
+                  <span>Month </span>
+                </MenuItem>
+
+                <MenuItem to="/totalbooking" isOpen={isOpen}>
+                  <FaClipboardList />
+                  <span>Total Booking</span>
+                </MenuItem>
+
                 <MenuItem to="/Listbyuser-booking" isOpen={isOpen}>
                   <FaClipboardList />
                   <span>List Booking By User</span>
@@ -260,6 +271,15 @@ const Sidebar = () => {
                 </MenuItem>
               </DropdownList>
             </DropdownContainer>
+            <MenuItem to="/Revenue" isOpen={isOpen}>
+              <FaUser />
+              <span>Report</span>
+            </MenuItem>
+
+            <MenuItem to="/Findcontrollnumber" isOpen={isOpen}>
+              <FaUser />
+              <span>Find-Control-Number</span>
+            </MenuItem>
 
             <MenuItem to="/profile" isOpen={isOpen}>
               <FaUser />
@@ -277,7 +297,7 @@ const Sidebar = () => {
 
             <MenuItem to="/Listbooking-confired" isOpen={isOpen}>
               <FaList />
-              <span>List confirmed</span>
+              <span>Generate Controll number</span>
             </MenuItem>
 
             <MenuItem to="/makepayemnt" isOpen={isOpen}>

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const StaffList = () => {
     const [stadiumStaff, setStadiumStaff] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate(); // Initialize navigate
 
     useEffect(() => {
-        // Fetch Stadiumstaff data from the backend
         axios.get('http://localhost:8080/api/stadiumstaff')
             .then(response => {
                 setStadiumStaff(response.data);
@@ -24,7 +25,6 @@ const StaffList = () => {
         if (window.confirm('Are you sure you want to delete this staff member?')) {
             axios.delete(`http://localhost:8080/api/stadiumstaff/${userid}`)
                 .then(() => {
-                    // Remove the deleted staff from the state
                     setStadiumStaff(stadiumStaff.filter(staff => staff.userid !== userid));
                 })
                 .catch(error => {
@@ -32,6 +32,10 @@ const StaffList = () => {
                     alert('Error deleting staff member');
                 });
         }
+    };
+
+    const handleEdit = (userid) => {
+        navigate(`/edit/${userid}`);
     };
 
     if (loading) {
@@ -51,7 +55,7 @@ const StaffList = () => {
                 <div className="card-body">
                     {stadiumStaff.length > 0 ? (
                         <table className="table table-striped table-bordered">
-                            <thead>
+                            <thead className="table-dark">
                                 <tr>
                                     <th>User ID</th>
                                     <th>First Name</th>
@@ -72,8 +76,13 @@ const StaffList = () => {
                                         <td>{staff.username}</td>
                                         <td>{staff.email}</td>
                                         <td>{staff.role}</td>
-                                        <td>{staff.stadium?.name}</td> {/* Assuming Stadium has a 'name' field */}
+                                        <td>{staff.stadium?.name}</td>
                                         <td>
+                                            <button 
+                                                className="btn btn-primary me-2" 
+                                                onClick={() => handleEdit(staff.userid)}>
+                                                Edit
+                                            </button>
                                             <button 
                                                 className="btn btn-danger" 
                                                 onClick={() => handleDelete(staff.userid)}>

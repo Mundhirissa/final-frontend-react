@@ -31,10 +31,17 @@ import Bookingliststaff from './Component/Staff/Bookingliststaff';
 import Paymentaddform from './Component/Payment/Paymentaddform';
 import StaffList from './Component/Staff/StaffList';
 import StadiumRevenue from './Component/StadiumRevenue';
+import Bookingperyear from './Component/Booking/Bookingperyear';
+import BookingsPerMonth from './Component/Booking/Bookingpermonth';
+import EditStaff from './Component/Staff/EditStaff';
+import RevenueReport from './Component/Revenu/RevenueReport';
+import PaymentComponent from './Component/Payment/PaymentComponent';
+
 
 const Content = styled.div`
   padding: 20px;
   transition: margin-left 0.3s ease;
+  min-height: 100vh;
 
   @media (max-width: 768px) {
     margin-left: ${({ hasSidebar }) => (hasSidebar ? '60px' : '0')};
@@ -72,9 +79,17 @@ const AppContent = () => {
           <Route path="/profile" element={<Userprofile />} />
 
           <Route path="/satff-add" element={<CreateStadiumstaff />} />
+          <Route path="/Findcontrollnumber" element={<PaymentComponent />} />
+          
+          <Route path="/Revenue" element={<RevenueReport />} />
+          
+          <Route path="/totalbooking" element={<Bookingperyear />} />
+          <Route path="/Monthbooking" element={<BookingsPerMonth />} />
+          <Route path="/edit/:userid" element={<EditStaff />} />
 
 
           <Route path="/admin" element={<Dashboard />} />
+         
 
           <Route path="/edit-User/:userid" element={<EditUser />} />
           <Route path="/user-details/:username" element={<UserDetails />} />

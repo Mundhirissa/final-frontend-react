@@ -10,6 +10,21 @@ const Bookings = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    function handleCancelBooking(bookingId) {
+        if (window.confirm('Are you sure you want to cancel this booking?')) {
+            axios.put(`http://localhost:8080/api/bookings/${bookingId}/cancel`)
+                .then(response => {
+                    alert("Booking canceled successfully");
+                    setBookings(prevBookingList => prevBookingList.map(booking =>
+                        booking.bookingId === bookingId ? { ...booking, status: "Canceled" } : booking
+                    ));
+                })
+                .catch(error => {
+                    console.error('Error canceling booking:', error);
+                });
+        }
+    }
+
     function handleDeletebooking(bookingId) {
         if (window.confirm('Are you sure you want to cancel this booking?')) {
         // Handle booking deletion logic
@@ -60,7 +75,7 @@ const Bookings = () => {
                 <div className="card-body">
                     {bookings.length > 0 ? (
                         <table className='table table-striped table-bordered'>
-                            <thead>
+                            <thead className="table-dark">
                                 <tr>
                                     <th>Booking ID</th>
                                     <th>Date</th>
@@ -87,9 +102,12 @@ const Bookings = () => {
                                             {booking.status}
                                         </td>
                                         <td>
-                                        <button className='btn btn-outline-danger me-2' onClick={() => handleDeletebooking(booking.bookingId)}>
+                                        {/* <button className='btn btn-outline-danger me-2' onClick={() => handleDeletebooking(booking.bookingId)}>
                                             Cancel
-                                        </button>
+                                        </button> */}
+                                        <button className='btn btn-warning' onClick={() => handleCancelBooking(booking.bookingId)}
+                                            
+                                            disabled={booking.status==="Confirmed"}>Cancel</button> {/* Cancel Button */}
                                         </td>
                                     </tr>
                                 ))}

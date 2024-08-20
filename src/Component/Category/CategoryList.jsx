@@ -40,7 +40,7 @@ export default function CategoryList() {
                 </div>
                 <div className="card-body">
                     <table className='table table-striped table-bordered'>
-                        <thead>
+                        <thead className="table-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Category Name</th>

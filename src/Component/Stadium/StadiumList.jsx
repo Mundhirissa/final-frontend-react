@@ -41,7 +41,7 @@ export default function StadiumList() {
                 </div>
                 <div className="card-body">
                     <table className='table table-striped table-bordered'>
-                        <thead>
+                        <thead className="table-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Stadium Name</th>

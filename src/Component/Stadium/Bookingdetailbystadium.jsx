@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -8,11 +7,22 @@ const Bookingdetailbystadium = () => {
     const { stadiumid } = useParams();
     const [bookings, setBookings] = useState([]);
     const [date, setDate] = useState('');
+    const [stadiumName, setStadiumName] = useState(''); // State to hold the stadium name
     const navigate = useNavigate();
     const role = localStorage.getItem('role');
 
     useEffect(() => {
         if (stadiumid) {
+            // Fetch the stadium details to get the stadium name
+            axios.get(`http://localhost:8080/api/stadiums/${stadiumid}`)
+                .then(response => {
+                    setStadiumName(response.data.name); // Store the stadium name
+                })
+                .catch(error => {
+                    console.error("There was an error fetching the stadium details!", error);
+                });
+
+            // Fetch the bookings for the specific stadium
             axios.get(`http://localhost:8080/api/bookings/stadium/${stadiumid}`)
                 .then(response => {
                     setBookings(response.data);
@@ -47,7 +57,7 @@ const Bookingdetailbystadium = () => {
 
     return (
         <div className="container mt-5">
-            <h2>Bookings for Stadium {stadiumid}</h2>
+            <h2>Bookings for {stadiumName}</h2> {/* Display the stadium name */}
             <div className="mb-4">
                 <input
                     type="date"
@@ -59,7 +69,7 @@ const Bookingdetailbystadium = () => {
                 <button onClick={handleDateSearch} className="btn btn-primary">Search</button>
             </div>
             <table className="table table-striped table-bordered">
-                <thead>
+                <thead className="table-dark">
                     <tr>
                         <th>Booking ID</th>
                         <th>Date</th>

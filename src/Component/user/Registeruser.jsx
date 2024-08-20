@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { createuser } from '../../Services/Userservicse';
+import { createuser } from '../../Services/Userservicse'; // Ensure correct spelling
 import { useNavigate } from 'react-router-dom';
 
 function Registeruser() {
@@ -23,14 +22,16 @@ function Registeruser() {
     };
     console.log(UserList);
 
-    createuser(UserList).then((response) => {
-      console.log(response.data);
-      alert('Data saved successfully');
-      navigate('/');
-    }).catch(error => {
-      console.error('There was an error!', error);
-      alert('Failed to save data');
-    });
+    createuser(UserList)
+      .then((response) => {
+        console.log(response.data);
+        alert('Data saved successfully');
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error('There was an error!', error);
+        alert('Failed to save data');
+      });
   }
 
   function cancel() {
@@ -43,8 +44,10 @@ function Registeruser() {
         <h2 className="card-title text-center mb-4">Registration Form</h2>
         <form>
           <div className='form-group'>
+            <label htmlFor="firstname">Firstname</label>
             <input
               type="text"
+              id="firstname"
               placeholder="Enter Firstname"
               required
               name="firstname"
@@ -54,8 +57,10 @@ function Registeruser() {
             />
           </div>
           <div className='form-group'>
+            <label htmlFor="lastname">Lastname</label>
             <input
               type="text"
+              id="lastname"
               placeholder="Enter Lastname"
               required
               name="lastname"
@@ -65,8 +70,10 @@ function Registeruser() {
             />
           </div>
           <div className='form-group'>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
+              id="username"
               placeholder="Enter Username"
               required
               name="username"
@@ -76,8 +83,10 @@ function Registeruser() {
             />
           </div>
           <div className='form-group'>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
+              id="email"
               placeholder="Enter Email"
               required
               name="email"
@@ -87,8 +96,10 @@ function Registeruser() {
             />
           </div>
           <div className='form-group'>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
+              id="password"
               placeholder="Enter Password"
               required
               name="password"

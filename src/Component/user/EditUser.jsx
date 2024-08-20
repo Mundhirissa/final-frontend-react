@@ -96,7 +96,7 @@ export default function EditUser() {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div className="form-group mb-3">
+                        {/* <div className="form-group mb-3">
                             <label htmlFor="password">Password</label>
                             <input
                                 type="password"
@@ -107,7 +107,7 @@ export default function EditUser() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                        </div>
+                        </div> */}
                         <div className="form-group">
                             <button className="btn btn-outline-primary me-2" type="submit">Update</button>
                             <button className="btn btn-outline-danger" type="button" onClick={handleCancel}>Cancel</button>

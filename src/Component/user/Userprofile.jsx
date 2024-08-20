@@ -135,18 +135,7 @@ const Userprofile = () => {
               />
             </Form.Group>
 
-            <Form.Group>
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="text"
-                name="password"
-                value={editUser.password}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-
-
+        
           </Form>
         </Modal.Body>
         <Modal.Footer>

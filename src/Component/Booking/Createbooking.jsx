@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,7 +12,7 @@ const CreateBooking = () => {
         userid: '',
         stadiumid: '',
         categoryid: '',
-        status: 'Not confirmed' // Set default status
+        status: 'pending' // Set default status
     });
 
     const [users, setUsers] = useState([]);
@@ -57,9 +56,16 @@ const CreateBooking = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
+
+        setFormData(prevFormData => {
+            const newFormData = { ...prevFormData, [name]: value };
+
+            if (name === 'startTime') {
+                // Set the min value for endTime to startTime
+                newFormData.endTime = prevFormData.endTime < value ? value : prevFormData.endTime;
+            }
+
+            return newFormData;
         });
     };
 
@@ -132,6 +138,7 @@ const CreateBooking = () => {
                                 name="endTime"
                                 value={formData.endTime} 
                                 onChange={handleChange} 
+                                min={formData.startTime} // Set min value to startTime
                                 required 
                             />
                         </div>
