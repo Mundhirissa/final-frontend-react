@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
@@ -39,7 +38,7 @@ const Userprofile = () => {
       lastname: user.lastname,
       username: user.username,
       email: user.email,
-      password:user.password
+      password: user.password
     });
     setShowModal(true);
   };
@@ -61,42 +60,46 @@ const Userprofile = () => {
   };
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light">Loading...</div>;
   }
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
-      <div className="card shadow-lg p-4" style={{ maxWidth: '400px', width: '100%' }}>
+      <div className="card shadow-sm rounded-lg p-4" style={{ maxWidth: '500px', width: '100%' }}>
         <h2 className="card-title text-center mb-4">User Profile</h2>
-        <div className="form-group">
-          <label>First Name:</label><p>{user.firstname}</p>
+        <div className="form-group mb-3">
+          <label className="font-weight-bold">First Name:</label>
+          <p>{user.firstname}</p>
         </div>
-        <div className="form-group">
-          <label>Last Name:</label><p>{user.lastname}</p>
+        <div className="form-group mb-3">
+          <label className="font-weight-bold">Last Name:</label>
+          <p>{user.lastname}</p>
         </div>
-        <div className="form-group">
-          <label>Username:</label>
+        <div className="form-group mb-3">
+          <label className="font-weight-bold">Username:</label>
           <p>{user.username}</p>
         </div>
-        <div className="form-group">
-          <label>Email:</label>
+        <div className="form-group mb-3">
+          <label className="font-weight-bold">Email:</label>
           <p>{user.email}</p>
         </div>
-        <div className="form-group">
-          <label>Role:</label>
+        <div className="form-group mb-3">
+          <label className="font-weight-bold">Role:</label>
           <p>{user.role}</p>
         </div>
-        <Button variant="primary" onClick={handleEdit}>Edit</Button>
+        <div className="text-center">
+          <Button variant="primary" onClick={handleEdit}>Edit</Button>
+        </div>
         {message && <p className="mt-3 text-center text-danger">{message}</p>}
       </div>
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit User-Profile</Modal.Title>
+          <Modal.Title>Edit User Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>First Name</Form.Label>
               <Form.Control
                 type="text"
@@ -105,7 +108,7 @@ const Userprofile = () => {
                 onChange={handleChange}
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 type="text"
@@ -114,7 +117,7 @@ const Userprofile = () => {
                 onChange={handleChange}
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
@@ -123,9 +126,7 @@ const Userprofile = () => {
                 onChange={handleChange}
               />
             </Form.Group>
-
-
-            <Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
@@ -134,8 +135,7 @@ const Userprofile = () => {
                 onChange={handleChange}
               />
             </Form.Group>
-
-        
+          
           </Form>
         </Modal.Body>
         <Modal.Footer>

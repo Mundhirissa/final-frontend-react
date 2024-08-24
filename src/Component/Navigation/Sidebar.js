@@ -4,12 +4,11 @@ import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaHome, FaPlus, FaList, FaSignInAlt, FaSignOutAlt, FaUserPlus, FaBookmark,FaWallet, FaClipboardList, FaUser, FaChevronDown, FaChevronUp, FaChevronRight, FaTags, FaFootballBall, FaAngleDoubleUp, FaCaretUp, FaCaretDown } from 'react-icons/fa';
 import { FaFootball } from 'react-icons/fa6';
-
 const SidebarContainer = styled.div`
   width: ${({ isOpen }) => (isOpen ? '250px' : '60px')};
   height: 100vh;
-  background-color: #333;
-  color: white;
+  background-color: #1e2a38; /* Darker shade for a modern look */
+  color: #ffffff; /* White text for contrast */
   position: fixed;
   top: 0;
   left: 0;
@@ -17,9 +16,40 @@ const SidebarContainer = styled.div`
   flex-direction: column;
   align-items: center;
   transition: width 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  border-right: 2px solid #007bff; /* Accent color border for visual interest */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
 
   @media (max-width: 768px) {
     width: ${({ isOpen }) => (isOpen ? '200px' : '60px')};
+  }
+
+  /* Sidebar header styling */
+  .sidebar-header {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff; /* Bright blue color for the header */
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-bottom: 2px solid #0056b3; /* Darker blue for border */
+  }
+
+  /* Sidebar links styling */
+  .sidebar-link {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3; /* Darker blue for hover effect */
+      color: #ffffff;
+    }
   }
 `;
 
@@ -69,31 +99,53 @@ const MenuItem = styled(Link)`
     transition: display 0.3s ease;
   }
 `;
-
 const DropdownContainer = styled.div`
   width: 100%;
   padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #333;
+  background-color: #1e2a38; /* Match the sidebar background */
+  border-radius: 4px; /* Rounded corners for consistency */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
 `;
 
 const DropdownHeader = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Space out the icon and text */
+  padding: 10px;
+  background-color: #007bff; /* Match the sidebar header color */
+  color: #ffffff; /* White text for contrast */
+  border-radius: 4px; /* Consistent rounded corners */
   cursor: pointer;
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #444;
+    background-color: #0056b3; /* Darker blue on hover */
   }
 `;
 
 const DropdownList = styled.div`
   width: 100%;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  padding: 10px;
+  background-color: #2c3e50; /* Slightly lighter shade than sidebar background */
+  border-radius: 4px; /* Rounded corners for consistency */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 `;
+const H4 = styled.h4`
+  font-size: 1.3rem;
+  font-weight: bold;
+  color:  #007bff; /* Yellow color */
+  background-color: #333; /* Black background */
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+
 
 const LogoutButton = styled.button`
   width: 100%;
@@ -147,9 +199,12 @@ const Sidebar = () => {
 
   return (
     <SidebarContainer isOpen={isOpen}>
-      <ToggleButton onClick={toggleSidebar}>
+
+<H4>STADIUM BOOKING</H4>
+
+      {/* <ToggleButton onClick={toggleSidebar}>
         {isOpen ? '✕' : '☰'}
-      </ToggleButton>
+      </ToggleButton> */}
       <MenuItemsContainer>
         {!role && (
           <>
@@ -278,7 +333,7 @@ const Sidebar = () => {
 
             <MenuItem to="/Findcontrollnumber" isOpen={isOpen}>
               <FaUser />
-              <span>Find-Control-Number</span>
+              <span>Find-Control-umber</span>
             </MenuItem>
 
             <MenuItem to="/profile" isOpen={isOpen}>
@@ -330,11 +385,17 @@ const Sidebar = () => {
               <FaHome />
               <span>Dashboard</span>
             </MenuItem>
+            
 
        
             <MenuItem to="/Listbookign" isOpen={isOpen}>
               <FaList />
               <span>List Booking</span>
+            </MenuItem>
+
+            <MenuItem to="/Findcontrollnumber" isOpen={isOpen}>
+              <FaUser />
+              <span>Find-Control-umber</span>
             </MenuItem>
 
             <MenuItem to="/profile" isOpen={isOpen}>

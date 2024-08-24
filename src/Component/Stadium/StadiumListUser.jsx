@@ -32,7 +32,7 @@ export default function StadiumListUser() {
                                 <p className="card-text"><strong>DaytimePrice:</strong> {stadium.daytimePrice}</p>
                                 <p className="card-text"><strong>NighttimePrice:</strong> {stadium.nighttimePrice}</p>
                                 <div className="d-flex justify-content-between">
-                                    <Link to={`/BookingBystadium/${stadium.stadiumid}`} className='btn btn-outline-secondary'>Details</Link>
+                                    <Link to={`/BookingBystadium/${stadium.stadiumid}`} className='btn btn-outline-info'>Check-Availabilty</Link>
                                     <Link to={'/Create-booking/'} className='btn btn-primary'>Book</Link>
                                 </div>
                             </div>

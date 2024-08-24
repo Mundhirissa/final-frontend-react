@@ -4,6 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { deletebyidbooking } from '../../Services/Bookingservices';
 import { FaTimes, FaEdit } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Bookings = () => {
     const [bookings, setBookings] = useState([]);
@@ -107,7 +108,19 @@ const Bookings = () => {
                                         </button> */}
                                         <button className='btn btn-warning' onClick={() => handleCancelBooking(booking.bookingId)}
                                             
-                                            disabled={booking.status==="Confirmed"}>Cancel</button> {/* Cancel Button */}
+                                            disabled={booking.status==="Confirmed"}>Cancel</button> 
+
+                                        {booking.status === "Confirmed" ? (
+                                            <button className="btn btn-info me-2" disabled>
+                                                <FaEdit />
+                                            </button>
+                                        ) : (
+                                            <Link to={`/edit-booking/${booking.bookingId}`} className="btn btn-info me-2">
+                                                <FaEdit />
+                                            </Link>
+                                        )}
+                                        
+
                                         </td>
                                     </tr>
                                 ))}

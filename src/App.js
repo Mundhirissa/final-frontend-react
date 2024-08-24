@@ -79,6 +79,7 @@ const AppContent = () => {
           <Route path="/profile" element={<Userprofile />} />
 
           <Route path="/satff-add" element={<CreateStadiumstaff />} />
+
           <Route path="/Findcontrollnumber" element={<PaymentComponent />} />
           
           <Route path="/Revenue" element={<RevenueReport />} />
@@ -122,11 +123,11 @@ const AppContent = () => {
           <Route path="/Listbyuser-booking" element={<BookingListbyuser />} />
           <Route path="/Listbooking-confired" element={<ConfirmedBookingsTable />} />
           <Route path="/profile" element={<Userprofile />} />
-          <Route path="*" element={<Navigate to="/List-stadium-user" />} />
-
-
           <Route path="/payment/:bookingId" element={<PaymentPage />} />
           <Route path="/makepayemnt" element={<Paymentaddform />} />
+          <Route path="/edit-booking/:bookingId" element={<Editbooking />} />
+
+          <Route path="*" element={<Navigate to="/List-stadium-user" />} />
 
         </>
       );
@@ -142,7 +143,8 @@ const AppContent = () => {
         <Route path="/edit-booking/:bookingId" element={<Editbooking />} />
           <Route path="/profile" element={<Userprofile />} />
           <Route path="/amountstadium" element={< StadiumRevenue/>} />
-          <Route path="*" element={<Navigate to="/List-stadium-user" />} />
+          <Route path="/Findcontrollnumber" element={<PaymentComponent />} />
+          <Route path="*" element={<Navigate to="/Listbookign" />} />
 
 
         </>
