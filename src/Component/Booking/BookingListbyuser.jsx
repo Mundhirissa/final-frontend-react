@@ -112,11 +112,11 @@ const Bookings = () => {
 
                                         {booking.status === "Confirmed" ? (
                                             <button className="btn btn-info me-2" disabled>
-                                                <FaEdit />
+                                                <FaEdit />Edit
                                             </button>
                                         ) : (
                                             <Link to={`/edit-booking/${booking.bookingId}`} className="btn btn-info me-2">
-                                                <FaEdit />
+                                                <FaEdit /> Edit
                                             </Link>
                                         )}
                                         

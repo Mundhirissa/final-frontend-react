@@ -36,6 +36,7 @@ import BookingsPerMonth from './Component/Booking/Bookingpermonth';
 import EditStaff from './Component/Staff/EditStaff';
 import RevenueReport from './Component/Revenu/RevenueReport';
 import PaymentComponent from './Component/Payment/PaymentComponent';
+import PaymentTable from './Component/Payment/PaymentTable';
 
 
 const Content = styled.div`
@@ -144,6 +145,8 @@ const AppContent = () => {
           <Route path="/profile" element={<Userprofile />} />
           <Route path="/amountstadium" element={< StadiumRevenue/>} />
           <Route path="/Findcontrollnumber" element={<PaymentComponent />} />
+
+          <Route path="/paymenttable" element={<PaymentTable />} />
           <Route path="*" element={<Navigate to="/Listbookign" />} />
 
 

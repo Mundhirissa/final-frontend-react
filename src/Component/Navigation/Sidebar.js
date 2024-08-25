@@ -385,6 +385,12 @@ const Sidebar = () => {
               <FaHome />
               <span>Dashboard</span>
             </MenuItem>
+
+            
+            <MenuItem to="/paymenttable" isOpen={isOpen}>
+              <FaList />
+              <span>Payment List</span>
+            </MenuItem>
             
 
        
